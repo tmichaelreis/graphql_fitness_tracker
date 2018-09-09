@@ -13,7 +13,7 @@ defmodule GraphqlFitnessTracker.Identity.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name])
-    |> validate_required([:email, :name])
+    |> cast(attrs, [:email, :name, :password])
+    |> validate_required([:email, :name, :password])
   end
 end
