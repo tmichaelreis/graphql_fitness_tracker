@@ -11,6 +11,7 @@ defmodule GraphqlFitnessTrackerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug(GraphqlFitnessTrackerWeb.Context)
   end
 
   scope "/api" do
