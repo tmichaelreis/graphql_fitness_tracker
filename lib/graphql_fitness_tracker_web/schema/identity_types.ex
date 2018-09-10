@@ -4,10 +4,8 @@ defmodule GraphqlFitnessTrackerWeb.Schema.IdentityTypes do
     in the Identity context
   """
 
-  @doc """
-    Allow the use of Absinthe schema macros like
-    `object` and `field`
-  """
+  # Allow the use of Absinthe schema macros like
+  # `object` and `field`
   use Absinthe.Schema.Notation
 
   alias GraphqlFitnessTracker.Identity

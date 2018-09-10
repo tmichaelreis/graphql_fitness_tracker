@@ -6,7 +6,7 @@ defmodule GraphqlFitnessTrackerWeb.Schema do
   use Absinthe.Schema
 
   # Import types from other modules to avoid cluttering this file
-  import_types GraphqlFitnessTrackerWeb.Schema.IdentityTypes
+  import_types GraphqlFitnessTrackerWeb.Schema.{IdentityTypes, FitnessTypes}
 
   # Base query schema
   query do
@@ -18,13 +18,12 @@ defmodule GraphqlFitnessTrackerWeb.Schema do
     end
 
     import_fields :identity_queries
+    import_fields :fitness_queries
   end
 
   # Base mutation schema
   mutation do
     import_fields :identity_mutations
   end
-
-
 
 end

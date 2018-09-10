@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias GraphqlFitnessTracker.Identity
+alias GraphqlFitnessTracker.{Identity, Fitness}
 
 users = [
   %{
@@ -27,5 +27,23 @@ users = [
 
 Enum.map(users, fn params ->
   {:ok, user} = params |> Identity.create_user()
-  user
+end)
+
+activities =[
+  %{
+    name: "Cycling"
+  },
+  %{
+    name: "Climbing"
+  },
+  %{
+    name: "Running"
+  },
+  %{
+    name: "Yoga"
+  }
+]
+
+Enum.map(activities, fn params ->
+  {:ok, activity} = params |> Fitness.create_activity()
 end)
