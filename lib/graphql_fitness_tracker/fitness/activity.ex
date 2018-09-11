@@ -2,9 +2,8 @@ defmodule GraphqlFitnessTracker.Fitness.Activity do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "activities" do
-    field :name, :string
+    field(:name, :string)
 
     timestamps()
   end

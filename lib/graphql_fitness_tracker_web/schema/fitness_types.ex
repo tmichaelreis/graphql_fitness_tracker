@@ -7,24 +7,24 @@ defmodule GraphqlFitnessTrackerWeb.Schema.FitnessTypes do
 
   object :fitness_queries do
     field :activities, non_null(list_of(:activity)) do
-      resolve &Resolvers.FitnessResolver.get_activities/3
+      resolve(&Resolvers.FitnessResolver.get_activities/3)
     end
 
     field :workouts, list_of(:workout) do
-      resolve &Resolvers.FitnessResolver.get_workouts/3
+      resolve(&Resolvers.FitnessResolver.get_workouts/3)
     end
   end
 
   object :activity do
-    field :name, :string
+    field(:name, :string)
   end
 
   object :workout do
-    field :duration, :integer
-    field :location, :string
+    field(:duration, :integer)
+    field(:location, :string)
+
     field :activity, :activity do
-      resolve &Resolvers.FitnessResolver.get_activity/3
+      resolve(&Resolvers.FitnessResolver.get_activity/3)
     end
   end
-
 end

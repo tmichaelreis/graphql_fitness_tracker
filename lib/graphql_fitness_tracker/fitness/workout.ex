@@ -5,10 +5,10 @@ defmodule GraphqlFitnessTracker.Fitness.Workout do
   alias GraphqlFitnessTracker.{Identity, Fitness}
 
   schema "workouts" do
-    field :duration, :integer
-    field :location, :string
-    belongs_to :activity, Fitness.Activity
-    belongs_to :user, Identity.User
+    field(:duration, :integer)
+    field(:location, :string)
+    belongs_to(:activity, Fitness.Activity)
+    belongs_to(:user, Identity.User)
 
     timestamps()
   end

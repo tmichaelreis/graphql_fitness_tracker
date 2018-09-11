@@ -15,12 +15,9 @@ defmodule GraphqlFitnessTrackerWeb.Context do
          {:ok, user_id} <- GraphqlFitnessTrackerWeb.Auth.verify(token),
          %Identity.User{} = user <- Identity.get_user(user_id) do
       %{current_user: user}
-    
     else
       _ ->
         %{}
-
     end
   end
-
 end

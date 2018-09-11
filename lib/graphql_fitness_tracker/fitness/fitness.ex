@@ -69,8 +69,8 @@ defmodule GraphqlFitnessTracker.Fitness do
   end
 
   def scope_to_user(query, %{id: user_id}) do
-    from workout in query,
+    from(workout in query,
       where: workout.user_id == ^user_id
+    )
   end
-
 end

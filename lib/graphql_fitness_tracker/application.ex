@@ -11,7 +11,7 @@ defmodule GraphqlFitnessTracker.Application do
       # Start the Ecto repository
       supervisor(GraphqlFitnessTracker.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(GraphqlFitnessTrackerWeb.Endpoint, []),
+      supervisor(GraphqlFitnessTrackerWeb.Endpoint, [])
       # Start your own worker by calling: GraphqlFitnessTracker.Worker.start_link(arg1, arg2, arg3)
       # worker(GraphqlFitnessTracker.Worker, [arg1, arg2, arg3]),
     ]

@@ -14,18 +14,18 @@ defmodule GraphqlFitnessTrackerWeb.Schema.IdentityTypes do
 
   object :identity_queries do
     field :me, :user do
-      resolve fn _, _, %{context: context} ->
+      resolve(fn _, _, %{context: context} ->
         {:ok, context[:current_user]}
-      end
+      end)
     end
   end
 
   object :identity_mutations do
     field :create_session, :session do
-      arg :email, non_null(:string)
-      arg :password, non_null(:string)
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
 
-      resolve &create_session/3
+      resolve(&create_session/3)
     end
   end
 
@@ -46,16 +46,16 @@ defmodule GraphqlFitnessTrackerWeb.Schema.IdentityTypes do
   end
 
   object :session do
-    field :user, non_null(:user)
-    field :token, non_null(:string)
+    field(:user, non_null(:user))
+    field(:token, non_null(:string))
   end
 
   object :user do
-    field :name, :string
-    field :email, :string
+    field(:name, :string)
+    field(:email, :string)
 
     field :workouts, list_of(:workout) do
-      resolve &Resolvers.FitnessResolver.get_workouts/3
+      resolve(&Resolvers.FitnessResolver.get_workouts/3)
     end
   end
 end

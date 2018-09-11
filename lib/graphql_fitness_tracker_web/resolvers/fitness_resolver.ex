@@ -4,7 +4,7 @@ defmodule GraphqlFitnessTrackerWeb.Resolvers.FitnessResolver do
   alias GraphqlFitnessTracker.Fitness
 
   def get_activities(_, _, _) do
-    activities = Fitness.list_activities
+    activities = Fitness.list_activities()
     {:ok, activities}
   end
 

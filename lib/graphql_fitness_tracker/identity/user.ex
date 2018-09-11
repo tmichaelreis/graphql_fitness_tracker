@@ -3,9 +3,9 @@ defmodule GraphqlFitnessTracker.Identity.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :email, :string
-    field :name, :string
-    field :password, Comeonin.Ecto.Password
+    field(:email, :string)
+    field(:name, :string)
+    field(:password, Comeonin.Ecto.Password)
 
     timestamps()
   end
