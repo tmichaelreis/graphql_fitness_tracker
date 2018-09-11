@@ -25,8 +25,9 @@ users = [
   }
 ]
 
-Enum.map(users, fn params ->
+[user1, user2] = Enum.map(users, fn params ->
   {:ok, user} = params |> Identity.create_user()
+  user
 end)
 
 activities =[
@@ -44,6 +45,38 @@ activities =[
   }
 ]
 
-Enum.map(activities, fn params ->
+[cycling, climbing, running, yoga] = Enum.map(activities, fn params ->
   {:ok, activity} = params |> Fitness.create_activity()
+  activity
+end)
+
+workouts = [
+  %{
+    duration: 3600,
+    location: "Copper Mountain",
+    activity_id: cycling.id,
+    user_id: user1.id
+  },
+  %{
+    duration: 60 * 90,
+    location: "Golden",
+    activity_id: running.id,
+    user_id: user1.id
+  },
+  %{
+    duration: 3600,
+    location: "The Ranch",
+    activity_id: yoga.id,
+    user_id: user1.id
+  },
+  %{
+    duration: 3600,
+    location: "Rockn and Jamn",
+    activity_id: climbing.id,
+    user_id: user2.id
+  }
+]
+
+Enum.map(workouts, fn params ->
+  {:ok, workout} = params |> Fitness.create_workout()
 end)

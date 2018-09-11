@@ -6,7 +6,7 @@ defmodule GraphqlFitnessTracker.Fitness do
   import Ecto.Query, warn: false
   alias GraphqlFitnessTracker.Repo
 
-  alias GraphqlFitnessTracker.Fitness.Activity
+  alias GraphqlFitnessTracker.Fitness.{Activity, Workout}
 
   @doc """
   Returns the list of activities.
@@ -20,22 +20,6 @@ defmodule GraphqlFitnessTracker.Fitness do
   def list_activities do
     Repo.all(Activity)
   end
-
-  @doc """
-  Gets a single activity.
-
-  Raises `Ecto.NoResultsError` if the Activity does not exist.
-
-  ## Examples
-
-      iex> get_activity!(123)
-      %Activity{}
-
-      iex> get_activity!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_activity!(id), do: Repo.get!(Activity, id)
 
   @doc """
   Creates a activity.
@@ -55,50 +39,38 @@ defmodule GraphqlFitnessTracker.Fitness do
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a activity.
-
-  ## Examples
-
-      iex> update_activity(activity, %{field: new_value})
-      {:ok, %Activity{}}
-
-      iex> update_activity(activity, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_activity(%Activity{} = activity, attrs) do
-    activity
-    |> Activity.changeset(attrs)
-    |> Repo.update()
+  def get_activity(workout) do
+    Repo.get(Activity, workout.activity_id)
   end
 
   @doc """
-  Deletes a Activity.
-
-  ## Examples
-
-      iex> delete_activity(activity)
-      {:ok, %Activity{}}
-
-      iex> delete_activity(activity)
-      {:error, %Ecto.Changeset{}}
-
+  Creates a workout
   """
-  def delete_activity(%Activity{} = activity) do
-    Repo.delete(activity)
+  def create_workout(attrs \\ %{}) do
+    %Workout{}
+    |> Workout.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking activity changes.
-
-  ## Examples
-
-      iex> change_activity(activity)
-      %Ecto.Changeset{source: %Activity{}}
-
+  Lists workouts for the current user
   """
-  def change_activity(%Activity{} = activity) do
-    Activity.changeset(activity, %{})
+  def list_workouts(current_user) do
+    current_user
+    |> query_workouts
+    |> Repo.all()
   end
+
+  def query_workouts(user) do
+    Workout
+    |> order_by(desc: :inserted_at)
+    |> IO.inspect(label: "In query workouts pipe")
+    |> scope_to_user(user)
+  end
+
+  def scope_to_user(query, %{id: user_id}) do
+    from workout in query,
+      where: workout.user_id == ^user_id
+  end
+
 end

@@ -10,6 +10,8 @@ defmodule GraphqlFitnessTrackerWeb.Schema.IdentityTypes do
 
   alias GraphqlFitnessTracker.Identity
 
+  alias GraphqlFitnessTrackerWeb.Resolvers
+
   object :identity_queries do
     field :me, :user do
       resolve fn _, _, %{context: context} ->
@@ -51,5 +53,9 @@ defmodule GraphqlFitnessTrackerWeb.Schema.IdentityTypes do
   object :user do
     field :name, :string
     field :email, :string
+
+    field :workouts, list_of(:workout) do
+      resolve &Resolvers.FitnessResolver.get_workouts/3
+    end
   end
 end
