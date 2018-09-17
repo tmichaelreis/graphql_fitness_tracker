@@ -22,10 +22,15 @@ users = [
     name: "Alaina Reis",
     email: "alaina@localhost.com",
     password: "abc123"
+  },
+  %{
+    name: "Johnson Steubens",
+    email: "johnson@localhost.com",
+    password: "abc123"
   }
 ]
 
-[user1, user2] = Enum.map(users, fn params ->
+[user1, user2, user3] = Enum.map(users, fn params ->
   {:ok, user} = params |> Identity.create_user()
   user
 end)
@@ -42,10 +47,16 @@ activities =[
   },
   %{
     name: "Yoga"
+  },
+  %{
+    name: "Crossfit"
+  },
+  %{
+    name: "Boot Camp"
   }
 ]
 
-[cycling, climbing, running, yoga] = Enum.map(activities, fn params ->
+[cycling, climbing, running, yoga, crossfit, bootcamp] = Enum.map(activities, fn params ->
   {:ok, activity} = params |> Fitness.create_activity()
   activity
 end)
@@ -74,6 +85,24 @@ workouts = [
     location: "Rockn and Jamn",
     activity_id: climbing.id,
     user_id: user2.id
+  },
+  %{
+    duration: 3600,
+    location: "Xtreme Xfit",
+    activity_id: crossfit.id,
+    user_id: user3.id
+  },
+  %{
+    duration: 60 * 90,
+    location: "Denver",
+    activity_id: running.id,
+    user_id: user3.id
+  },
+  %{
+    duration: 3600,
+    location: "The Ranch",
+    activity_id: bootcamp.id,
+    user_id: user3.id
   }
 ]
 
