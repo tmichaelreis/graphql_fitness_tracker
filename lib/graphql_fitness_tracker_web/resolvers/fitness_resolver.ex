@@ -21,4 +21,23 @@ defmodule GraphqlFitnessTrackerWeb.Resolvers.FitnessResolver do
     activity = Fitness.get_activity(workout)
     {:ok, activity}
   end
+
+  def create_workout(_, %{input: input}, %{context: context}) do
+    input =
+      case context do
+        %{current_user: %{id: id}} ->
+          Map.put(input, :user_id, id)
+
+        _ ->
+          input
+      end
+
+    case Fitness.create_workout(input) do
+      {:ok, workout} ->
+        {:ok, workout}
+
+      {:error, _} ->
+        {:error, "didn't work"}
+    end
+  end
 end

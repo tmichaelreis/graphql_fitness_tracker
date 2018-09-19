@@ -24,5 +24,6 @@ defmodule GraphqlFitnessTrackerWeb.Schema do
   # Base mutation schema
   mutation do
     import_fields(:identity_mutations)
+    import_fields(:fitness_mutations)
   end
 end
